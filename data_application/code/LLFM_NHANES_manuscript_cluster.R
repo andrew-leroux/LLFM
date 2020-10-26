@@ -4,7 +4,7 @@ scenario <- as.numeric(commandArgs(trailingOnly=TRUE))
 b       <- scenario[1] # current bootstrap
 n_b     <- scenario[2] # total number of bootstrap samples
 n_cores <- scenario[3] # number of cores for parallelizing fit along the functional domain
-outfile <- file.path("..","" paste0("NHAMES_LLFM_bs", b, ".rds"))
+outfile <- file.path("..","results", paste0("NHAMES_LLFM_bs", b, ".rds"))
 
 
 
