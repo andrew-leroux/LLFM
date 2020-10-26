@@ -156,9 +156,9 @@ results <- foreach(s = sind, .packages=c("glmmTMB", "tidyverse")) %dopar% {
 }
 time_end <- Sys.time()
 time_end-time_start
-stopCluster(cl)
+# stopCluster(cl)
 
-write_rds(list("results" = results, "time_st" = time_start, time_end = time_end), path=outfile)
+write_rds(list("results" = results, "time_st" = time_start, time_end = time_end), file=outfile)
 
 
 ## save results
