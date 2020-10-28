@@ -5,7 +5,7 @@ b       <- scenario[1] # current bootstrap
 n_b     <- scenario[2] # total number of bootstrap samples
 s_b     <- scenario[3] # current functional domain
 
-outfile <- file.path("..","results", paste0("NHAMES_LLFM_bs", b, "_s", s_b, ".rds"))
+outfile <- file.path("..","results", paste0("NHANES_LLFM_bs", b, "_s", s_b, ".rds"))
 
 
 ## Check for packages needed to run analyses/install the rnhanesdata package.
