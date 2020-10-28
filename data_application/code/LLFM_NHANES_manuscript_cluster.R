@@ -73,7 +73,7 @@ df_fit   <-
 df_fit$Y <- I(matrix(as.numeric(df_fit$X >= 100),ncol=1440,nrow=nrow(df_fit$X),byrow=FALSE))
 ## clear up the workspace
 rm(PAXINTEN, Flags, Covariate)
-gc()
+
 
 
 ### bin the active/inactive indicators
@@ -116,11 +116,13 @@ bs_id <-  matrix(c(uid,sample(uid, size=nid*(n_b-1), replace=TRUE)), nid, n_b, b
 # create re-sampled data fram current subject bootstraps
 bs_id_b <- bs_id[,b]
 
+print("start data re-sample merging")
+
 df_b        <- lapply(seq_along(bs_id_b), function(x) data.frame("SEQN"=bs_id_b[x],"SEQN_b"=x))
 df_b        <- lapply(df_b, function(x) data.frame("SEQN_b"=x$SEQN_b, df_fit[which(df_fit$SEQN == x$SEQN),]))
 df_b        <- bind_rows(df_b)
 
-
+print("end data re-sample merging")
 
 ## fit the models
 time_st <- Sys.time()
@@ -128,6 +130,7 @@ time_st <- Sys.time()
 cl <- makeCluster(n_cores,setup_strategy = "sequential")
 registerDoParallel(cl)
 
+print("start for each loop")
 
 time_start <- Sys.time()
 results <- foreach(s = sind, .packages=c("glmmTMB", "tidyverse")) %dopar% {
@@ -157,6 +160,8 @@ results <- foreach(s = sind, .packages=c("glmmTMB", "tidyverse")) %dopar% {
 time_end <- Sys.time()
 time_end-time_start
 # stopCluster(cl)
+
+print("finish for each loop")
 
 write_rds(list("results" = results, "time_st" = time_start, time_end = time_end), file=outfile)
 
