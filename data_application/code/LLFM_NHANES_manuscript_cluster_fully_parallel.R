@@ -1,9 +1,9 @@
 rm(list=ls())
 ## get the number of cores and current bootstrap sample
 scenario <- as.numeric(commandArgs(trailingOnly=TRUE))
-b       <- scenario[1] # current bootstrap
-n_b     <- scenario[2] # total number of bootstrap samples
-s_b     <- scenario[3] # current functional domain
+b       <- scenario[2] # current bootstrap
+n_b     <- scenario[3] # total number of bootstrap samples
+s_b     <- scenario[1] # current functional domain
 
 outfile <- file.path("..","results", paste0("NHANES_LLFM_bs", b, "_s", s_b, ".rds"))
 
