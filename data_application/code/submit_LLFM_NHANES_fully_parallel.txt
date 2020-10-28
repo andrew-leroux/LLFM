@@ -1,0 +1,8 @@
+for b in {1..1001}
+do
+        for s in {1..1440}
+        do
+                
+                qsub -cwd -l mem_free=2G,h_vmem=2G, b=${i},s=${s} do_NHANES_analysis_fully_parallel.sh
+        done
+done

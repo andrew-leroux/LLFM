@@ -125,7 +125,6 @@ df_b        <- bind_rows(df_b)
 print("end data re-sample merging")
 
 ## fit the models
-time_st <- Sys.time()
 ## set up cluster for parallel computing
 cl <- makeCluster(n_cores,setup_strategy = "sequential")
 registerDoParallel(cl)

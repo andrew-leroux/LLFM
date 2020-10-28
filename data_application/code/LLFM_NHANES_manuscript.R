@@ -41,9 +41,10 @@ PAXINTEN <-
   PAXINTEN %>% 
   mutate(good_day = as.numeric(nmins_wear >= 600 & PAXCAL %in% 1 & PAXSTAT %in% 1)) %>% 
   group_by(SEQN) %>% 
-  mutate(day = 1:n()) %>% 
+  mutate(day = 1:n(),
+         n_good_days = sum(good_day)) %>% 
   ungroup() %>% 
-  filter(good_day == 1) %>% 
+  filter(good_day == 1, n_good_days >= 3) %>% 
   dplyr::select(-PAXCAL, -PAXSTAT) %>% 
   mutate(dow_fac = factor(WEEKDAY, levels=1:7, labels=c("Sun","Mon","Tue","Wed","Thu","Fri","Sat")))
 
